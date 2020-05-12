@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { VentasService } from './services/ventas.service';
+import { log } from 'util';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'mymarket';
+
+  constructor(){
+
+
+
+  }
 }

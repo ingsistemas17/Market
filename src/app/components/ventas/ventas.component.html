@@ -1,0 +1,145 @@
+<button type="button" 
+*ngIf="!agregarVenta"
+class="btn btn-primary mt-3 mb-5 btn-block"
+(click)="agregarVenta = true">
+    + Agregar Venta
+</button>
+
+<form *ngIf="agregarVenta" autocomplete="off" [formGroup]="forma"  (ngSubmit)="guardar()">
+    <div>
+        <div class="form-group row">
+
+            <div class="col">
+
+   
+            </div>
+            <div class="col">
+                <input 
+                class="form-control" 
+                type="number" 
+                placeholder="Nro Identificacion"
+                formControlName="cliente"
+                [class.is-invalid]= "clienteNoValido" >
+
+            </div>
+            <div class="col">
+                <button type="button" (click)="getCliente()" class="btn btn-success"> Buscar Cliente </button>
+
+            </div>
+        </div>
+        <hr>
+
+        <div class="form-group row">
+
+            <div class="col">
+                <h5>{{nombres}}</h5>
+
+            </div>
+            <div class="col">
+                <h5>{{apellidos}}</h5>
+
+            </div>
+            <div class="col">
+
+
+            </div>
+            
+        </div>
+        <small *ngIf="clienteNoValido" class="text-danger"> {{ errorCliente }} </small>
+        <hr>
+        <div class="form-group row">
+
+            <div class="col">
+
+                <input 
+                        class="form-control" 
+                        type="text" 
+                        placeholder="Codigo Producto"
+                        formControlName="producto"
+                        >
+                
+            </div>
+            <div class="col">
+                <input 
+                class="form-control" 
+                type="number"
+                placeholder="Cantidad"
+                formControlName="cantidad"
+                 >
+
+            </div>
+            <div class="col">
+                <button class="btn btn-success"
+                type="button"
+                (click)="getProducto()"
+                >Buscar Producto</button>
+
+            </div>
+        </div>
+        <small *ngIf="productoNoValido" class="text-danger"> {{ errorProducto }} </small>
+
+
+        <div class="row" >
+            <div class="col">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Valor Unt</th>
+                            <th>Valor Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                     <tbody  formArrayName="productos">
+                        <tr *ngFor="let control of productos.controls; let i = index">
+                            <td>
+                                <label class="col-2 col-form-label">{{ control.value[0] }}</label>
+                            </td>
+                            <td>
+                                <label class="col-2 col-form-label">{{ control.value[1] }}</label>
+                             </td>
+                             <td>
+                                <label class="col-2 col-form-label">{{ control.value[2] }}</label>
+                            </td>
+                            <td>
+                                <label class="col-2 col-form-label">{{ control.value[3]  }}</label>
+                            </td>
+                            <td>
+                                <label class="col-2 col-form-label">{{ control.value[4]   }}</label>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger"
+                                (click)="borrarProducto(i)"
+                                >Borrar</button>
+                            </td>
+                        </tr>
+                    </tbody> 
+                    
+                </table>
+
+                <hr>
+
+                <div class="form-group row">
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"><h5>Total</h5></div>
+                    <div class="col"><h5>Total</h5></div>
+                    <div class="col"></div>
+                </div>
+
+                <hr>
+                <button type="button" 
+                class="btn btn-primary mt-3 mb-5 btn-block"
+                (click)="agregarVenta =  true">
+                    Facturar Venta
+                </button>
+                
+            </div>
+        </div>
+    </div>
+
+</form> 
+
